@@ -1,0 +1,106 @@
+<header>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03"
+            aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand" href="#"><i class="material-icons md-48">school</i></a>
+
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+      <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/" routerLinkActive="active">Главная</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+             aria-haspopup="true" aria-expanded="false">
+            Ассортимент
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" routerLink="/catalog">Все товары</a>
+            <a *ngFor="let item of getMenu(items)" class="dropdown-item" routerLink="/catalog/{{item.type}}"
+               routerLinkActive="active">{{item.menu}}</a>
+          </div>
+
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/" routerLinkActive="active">Галерея</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/" routerLinkActive="active">Почему гипс?</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/" routerLinkActive="active">Заказать звонок</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/" routerLinkActive="active">Под заказ</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/" routerLinkActive="active">Контакты</a>
+        </li>
+
+      </ul>
+    <div *ngIf="getStatusLogin(); else elseBlock">
+      <div style="cursor: pointer" routerLink="/admin"><i class="material-icons align-text-top" style="color: rgb(40, 167, 69)">account_box</i> Artrainbow</div>
+    </div>
+
+      <ng-template #elseBlock>
+        <div style="cursor: pointer" routerLink="/admin"><i class="material-icons align-text-top" style="color: #dc3545">account_box</i> Вход</div>
+      </ng-template>
+
+
+    </div>
+  </nav>
+
+  <nav class="breadcrumb" style="line-height: 2.3rem">
+    <a class="breadcrumb-item" routerLink="/" routerLinkActive="active">Главная</a>
+    <a class="breadcrumb-item" routerLink="/catalog" routerLinkActive="active">Каталог</a>
+    <a class="breadcrumb-item" href="#" routerLinkActive="active">Детали</a>
+
+    <form class="form-inline my-2 my-lg-0" style="float: right">
+      <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </nav>
+</header>
+
+<main>
+  <router-outlet></router-outlet>
+</main>
+
+<footer class="footer mt-5">
+  <div routerLink="/cart" class="bg-primary fixed-bottom rounded-circle"
+       style="right: 50px; bottom: 50px; left: auto; border: 5px solid rgb(190, 221, 255); cursor: pointer; outline: none;">
+    <i class="material-icons md-48 text-white p-3">shopping_cart</i>
+    <div class="cart-length rounded-circle bg-danger">{{getCartLength()}}</div>
+  </div>
+
+  <div class="container px-2 py-5">
+    <span class="text-muted align-text-top pb-5">
+    НАШИ КОНТАКТЫ:
+      <hr class="my-3">
+      <p><i class="material-icons pr-2 align-text-top">location_on</i>Днепр, проспект Александра Поля (пр. Кирова), 33</p>
+      <span class="text-right" style="float: left">
+          <p><a class="text-muted" href="tel: +38(066)7709099"><i class="material-icons pr-2 align-text-top">phonelink_ring</i>+38(066) 770-39-99</a></p>
+          <p><a class="text-muted" href="tel: +38(096)2511337"><i class="material-icons pr-2 align-text-top">0</i>+38(096) 251-13-37</a></p>
+          <p><a class="text-muted" href="tel: +38(0562)322466"><i class="material-icons pr-2 align-text-top">0</i>+38(0562) 32-24-66</a></p>
+          <p><a class="text-muted" href="mailto:order@lepka.biz.ua"><i
+                  class="material-icons pr-2 align-text-top">email</i>order@lepka.biz.ua</a></p>
+        </span>
+      </span>
+
+  </div>
+
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+

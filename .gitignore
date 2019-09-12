@@ -1,2 +1,5 @@
 # Created by .ignore support plugin (hsz.mobi)
 .idea/Angular-app-decor.iml
+.angular-cli.json
+.editorconfig
+node_modules

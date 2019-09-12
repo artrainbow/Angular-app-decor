@@ -1,0 +1,94 @@
+<style>
+  .list-group-item-action .actions {
+    opacity: 0;
+  }
+
+  .list-group-item-action:hover .actions {
+    color: #525252;
+    opacity: 1;
+  }
+
+  .actions:hover i.material-icons {
+    color: #dc3545;
+  }
+
+  .list-group-item:first-child {
+    padding: .75rem 1.25rem;
+  }
+
+</style>
+
+<div class="jumbotron">
+  <h1 class="display-4">{{title}}</h1>
+  <hr class="my-4">
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 col-lg-8 pb-4">
+      <a class="list-group-item list-group-item-action list-group-item-primary">
+        <div class="container-fluid"></div>
+        <div class="row">
+          <div class="col" style="font-size: 90%"><strong>Изображение</strong></div>
+          <div class="col" style="font-size: 90%"><strong>Наименование</strong></div>
+          <div class="col" style="font-size: 90%"><strong>Размеры(мм)</strong></div>
+          <div class="col" style="font-size: 90%"><strong>Цена(грн)</strong></div>
+          <div class="" style="font-size: 90%"></div>
+        </div>
+      </a>
+      <div [ngSwitch]="cart.length">
+        <div *ngSwitchCase="0">
+          <a class="list-group-item list-group-item-action">
+            <div class="container-fluid"></div>
+            <div class="row">
+              <div class="col">Ваша корзина пуста.</div>
+            </div>
+          </a>
+        </div>
+        <div *ngSwitchDefault>
+          <a class="list-group-item list-group-item-action" *ngFor="let item of cart">
+            <div class="row">
+              <div (click)="addCurrentItem(item)" class="col" style="cursor: pointer"><img class="img-fluid" style="height: 60px" src="../assets/img/{{item.img}}" alt="{{item.name}}"></div>
+              <div class="col">{{item.category}} {{item.name}}</div>
+              <div class="col">{{item.size}}</div>
+              <div class="col">{{item.price}}-00</div>
+              <div class="actions" style="position: absolute; right: 3%">
+                <i (click)="delete(item)" class="material-icons" style="cursor: pointer">delete</i>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-12 col-lg-4">
+      <div class="card">
+        <div class="card-header">
+          Ваш заказ:
+        </div>
+        <div class="card-body">
+          <span class="card-title" style="display: inline-block"><strong>Сумма заказа:</strong> </span>
+          <span class="card-text" style="display: inline-block; float: right">{{calcSum()}}-00грн</span>
+          <div class="clearfix"></div>
+          <span class="card-title" style="display: inline-block"><strong>Доставка:</strong> </span>
+          <span class="card-text" style="display: inline-block; float: right">бесплатно</span>
+          <div class="clearfix"></div>
+          <hr>
+          <span class="card-title" style="display: inline-block"><strong>Итого:</strong> </span>
+          <span class="card-text" style="display: inline-block; float: right">{{calcSum()}}-00грн</span>
+          <div class="clearfix"></div>
+          <div [ngSwitch]="cart.length">
+            <div *ngSwitchCase="0">
+              <a class="btn btn-secondary btn-lg disabled" style="color: white">Оформить заказ</a>
+            </div>
+            <div *ngSwitchDefault>
+              <a class="btn btn-danger btn-lg enabled" style="color: white; cursor: pointer">Оформить заказ</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+

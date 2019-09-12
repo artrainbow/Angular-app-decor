@@ -1,0 +1,139 @@
+
+<div class="jumbotron">
+  <ng-container [ngSwitch]="type!=='undefined'">
+    <ng-container *ngSwitchCase="type=='detali'">
+      <h3 class="display-4">Детали из гипса</h3>
+      <p class="lead">лепнина из гипса | лепной декор: детали, замки, картуши, гирлянды.</p>
+      <hr class="my-3">
+      <p>Отдельные или парные лепные элементы из гипса: замки, картуши, гирлянды, из которых составляются всевозможные
+        композиции в виде розеток, вставок, углов, зеркал, называются деталями. Орнамент такого рода делает лепнину
+        индивидуальной и неповторимой. Предлагаем вашему вниманию большой выбор гипсовых изделий для фасада и
+        интерьера.</p>
+    </ng-container>
+    <ng-container *ngSwitchCase="type=='kronshteiny'">
+      <h3 class="display-4">Кронштейны и консоли из гипса</h3>
+      <p class="lead">лепнина из гипса | лепной декор: кронштейны, консоли.</p>
+      <hr class="my-3">
+      <p>Кронштейны и консоли - это опорные элементы из лепного декора, часто украшенные завитками, листьями, цветами,
+        лицами, гирляндами, несущие, как правило, декоративную функцию. Тем не менее, в прошлом, кронштейны
+        действительно поддерживали своды, арки, карнизы, балконы и прочие выступающие части фасадов и интерьеров.
+
+        Порой, декоративные кронштейны являются ключевым элементом декорирования, поскольку задают специфический тон в
+        отделке лепниной, от которого отталкиваются при выборе потолочных карнизов, порезок и деталей. Также, они
+        являются сравнительно крупными, бросающимися в глаза, декоративными элементами, наряду с колоннами и пилястрами.
+        Орнамент такого рода делает лепнину индивидуальной и неповторимой. Предлагаем вашему вниманию большой выбор
+        кронштейнов и консолей для фасада и интерьера.</p>
+    </ng-container>
+    <ng-container *ngSwitchDefault>
+      <h3 class="display-4">Каталог продукции</h3>
+      <p class="lead">розетки и плашки, карнизы и погонаж, колонны и пилястры, детали, кронштейны и консоли,
+        декоративный камень, другой декор</p>
+      <hr class="my-3">
+      <p>Гипсовая лепнина - это прежде всего элемент роскоши в декорировании помещений и фасадов. Искусство украшать и
+        покрывать стены, особенно потолки, рельефами, т.е. лепкой, известно очень давно. Греки и римляне применяли ее в
+        самых богатых формах с расколеровкой и золочением. С тех времен, все величайшие архитекторы использовали лепной
+        декор повсеместно, придавая изысканность и роскошь архитектурным сооружениям.
+        Современный дизайн также нуждается в лепнине. Правильное количество лепнины, ее умелое композиционное решение,
+        исполнение и расположение украшает любое современное здание как снаружи, так и внутри. </p>
+    </ng-container>
+  </ng-container>
+</div>
+
+
+<div class="container">
+  <div class="clearfix">
+    <div class="btn-group float-right">
+      <button type="button" class="btn btn-danger align-text-top dropdown-toggle dropdown-toggle-split"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					<span [ngSwitch]="sort">
+						<span *ngSwitchCase="0">От дешевых к дорогим</span>
+						<span *ngSwitchCase="1">От дорогих к дешевым</span>
+						<span *ngSwitchDefault>Сортировка по умолчанию</span>
+					</span>
+      </button>
+      <div class="dropdown-menu" style="cursor: pointer">
+        <a (click)="getSortAsc(items)" class="dropdown-item">От дешевых к дорогим</a>
+        <div class="dropdown-divider"></div>
+        <a (click)="getSortDesc(items)" class="dropdown-item">От дорогих к дешевым</a>
+      </div>
+    </div>
+  </div>
+  <hr class="my-3">
+
+  <div *ngIf="type else elseBlock">
+    <div  class="row">
+      <div *ngFor="let item of getItemsPagination(type)" class="col-xl-3 col-md-4 col-sm-12 py-2">
+        <!--      <div *ngFor="let item of getItemsPagination(type)" class="col-xl-3 col-md-4 col-sm-12 py-2"
+                   [style.display]="item.type == type?'block':'none'">-->
+
+
+        <div class="card">
+          <img routerLink="/detail/{{item.id}}" (click)="addCurrentItem(item)" class="card-img-top"
+               src="../assets/img/{{item.img}}" alt="Card image cap">
+          <div class="card-body">
+            <h4 class="card-title lead"><strong>{{item.category}} {{item.name}}</strong></h4>
+            <span class="card-text lead">
+            <small><strong>Размеры:</strong></small>
+          </span>
+            <p class="card-text lead">
+              {{item.size}}
+              <small>мм</small>
+            </p>
+            <p class="card-text price lead">{{item.price}}-00
+              <small>грн</small>
+            </p>
+            <a (click)="addToCart(item)" class="btn btn-primary" style="color: white; cursor: pointer"><i
+                    class="material-icons pr-1 align-text-top">add_shopping_cart</i>В корзину</a>
+          </div>
+        </div>
+      </div>
+
+
+
+
+    </div>
+    <nav aria-label="navigation">
+      <ul class="pagination justify-content-center">
+        <!--      <li class="page-item disabled">
+                <a class="page-link" href="#" tabindex="-1">Previous</a>
+              </li>-->
+        <li *ngFor="let page of getPageNumbers()" (click)="changePage(page)" class="page-item"
+            [class.active]="page == selectedPage" style="cursor: pointer"><a class="page-link">{{page}}</a></li>
+        <!--      <li class="page-item">
+                <a class="page-link" href="#">Next</a>
+              </li>-->
+      </ul>
+    </nav>
+  </div>
+
+
+  <ng-template #elseBlock>
+    <div class="row">
+      <div *ngFor="let item of getItemsPaginationNoCat()" class="col-xl-3 col-md-4 col-sm-12 py-2">
+        <div class="card">
+          <img routerLink="/detail/{{item.id}}" (click)="addCurrentItem(item)" class="card-img-top"
+               src="../assets/img/{{item.img}}" alt="Card image cap">
+          <div class="card-body">
+            <h4 class="card-title lead"><strong>{{item.category}} {{item.name}}</strong></h4>
+            <span class="card-text lead">
+            <small><strong>Размеры:</strong></small>
+          </span>
+            <p class="card-text lead">
+              {{item.size}}
+              <small>мм</small>
+            </p>
+            <p class="card-text price lead">{{item.price}}-00
+              <small>грн</small>
+            </p>
+            <a (click)="addToCart(item)" class="btn btn-primary" style="color: white; cursor: pointer"><i
+                    class="material-icons pr-1 align-text-top">add_shopping_cart</i>В корзину</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+
+
+
+</div>
+
