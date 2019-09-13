@@ -1,15 +1,19 @@
-# Decor
+# Decor App
 
-#### Install
-
-- sudo yarn install
-- cd bd
+#### install DB
+- cd db
 - sudo yarn install
 - dpd -d
-- cd ..
+
+#### Start and edit DB
+
+http://localhost:2403/dashboard/
+
+#### Install App
+
+- sudo yarn install
 - yarn run start
 
-
-#### start app
+#### Start App
 
 http://localhost:4200/
